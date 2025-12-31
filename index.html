@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>LOVE❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #000000, #787272);
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Ventanas */
+.ventana {
+    display: none;
+    height: 100vh;
+    padding-top: 18%;
+    position: relative;
+    overflow: hidden;
+}
+.activa { display: block; }
+
+/* Botones */
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background: #aa808a;
+    color: white;
+    cursor: pointer;
+    margin: 10px;
+}
+button:hover { background: #121111; }
+
+/* Caída */
+.caida {
+    position: absolute;
+    top: -25%;
+    animation: caer linear infinite;
+    white-space: nowrap;
+}
+@keyframes caer {
+    to { transform: translateY(120vh); opacity: 0; }
+}
+
+/* Fotos */
+.foto {
+    width: 180px;
+    border-radius: 14px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+}
+
+/* Listón */
+.liston {
+    width: 4px;
+    height: 45px;
+    background: pink;
+    margin: 0 auto;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Música -->
+<audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<!-- VENTANAS -->
+<div id="v1" class="ventana activa">
+    <h1>Holii! mi Poshito :)❤️</h1>
+    <p>jajajja no se que diablos hice pero espero
+        te guste , pense que no demoraria tanto 
+        pero ajam y aqui vamos jijiji
+    </p>
+    <button onclick="iniciar()">Came Baby</button>
+</div>
+
+<div id="v2" class="ventana">
+    <h1>TE AMITO 💕</h1>
+    <p>Eh bueno solo paso a decirte que 
+        Eres una persona muy increíble y amo estar 
+        contigo jajaj nunca me cansare de decirlo te amo 
+    </p>
+    <p>Y eres muy importante para mí Atte:TU Pandita
+        (el apodo que empezo todo jaja)
+    </p>
+    <button onclick="ir(3)">NEXT</button>
+</div>
+
+<div id="v3" class="ventana">
+    <h1>LLEGASTE!! JAJA solo para 
+        Recordarte que te amoooooooooo 💖</h1>
+    <p>Como veras hago cosas que no imagine hacer jajaj
+        y conste que no me gusta codificar me es complicado
+        y aburrido jajaj pero bueno yo puedo hace todo
+        asi que continua Mi amor  
+    </p>
+    <button onclick="ir(4)">Keep Going My Love</button>
+</div>
+
+<div id="v4" class="ventana">
+    <h1>¿Sabías que te amito mucho muchisimo? ❤️</h1>
+    <p>"Te confieso que antes de conocerte no
+         sabía que iba a hacer de mi vida.
+          ¿Alguna vez has sentido como el mundo
+          se te viene encima? Así me sentía,
+          hasta que tu apareciste."</p>
+    <p>jijiji es una de las frases del libro 
+        que me gusta y a la cual iremos 
+        a verla y nada decirte que te amo muchisimo
+    </p>
+    <button onclick="activarSorpresa()">Surprise!!!</button>
+</div>
+
+<div id="v5" class="ventana">
+    <h1>Sorpresa!!!! MI POSHITO 🎁</h1>
+    <p>JIJII LAS FOTOS SON MOMENTOS DONDE ESTABA FELIZ
+        Y DONDE ESTABAS TU O DONDE FUISTE EL ACTOR PRINCIPAL
+        AJJAJAJAJA COMO DE DIJE MIETRAS SEAS TU EN UN SI A TODO 
+        Y TE AMO COMO NO TIENES IDEA Y EN MI OPINION POR FAVOR
+        TEGAMOS MAS FOTOS DECENTES JAJAJ 💘</p>
+    <button onclick="ir(1)">RETURN</button>
+</div>
+
+<script>
+/* Navegación */
+function ir(n) {
+    document.querySelectorAll('.ventana')
+        .forEach(v => v.classList.remove('activa'));
+    document.getElementById('v' + n).classList.add('activa');
+}
+
+/* Música */
+const musica = document.getElementById("musica");
+function iniciar() {
+    musica.play();
+    ir(2);
+}
+
+/* ❤️ Corazones (solo antes de la sorpresa) */
+let corazonesActivos = true;
+function crearCorazon() {
+    if (!corazonesActivos) return;
+    const c = document.createElement("div");
+    c.className = "caida";
+    c.innerText = "❤️";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.fontSize = "24px";
+    c.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+}
+setInterval(crearCorazon, 300);
+
+/* 💬 FRASES — CAEN SIEMPRE */
+const palabras = [
+    "Te quiero Poshito💕",
+    "Amocito! ❤️",
+    "Te amitooo💖",
+    "MY HUSBAND💘",
+    "I LOVE YOU VERY MUCH💗",
+    "TE AMO😊"
+];
+
+function crearPalabraGlobal() {
+    const p = document.createElement("div");
+    p.className = "caida";
+    p.innerText = palabras[Math.floor(Math.random() * palabras.length)];
+    p.style.left = Math.random() * 90 + "vw";
+    p.style.fontSize = "22px";
+    p.style.animationDuration = (Math.random() * 4 + 3) + "s";
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 7000);
+}
+setInterval(crearPalabraGlobal, 450);
+
+/* 🖼️ Fotos SOLO en la sorpresa */
+const fotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg"];
+let intervaloFotos = null;
+
+function crearFoto() {
+    const v5 = document.getElementById("v5");
+
+    const cont = document.createElement("div");
+    cont.className = "caida";
+    cont.style.left = Math.random() * 80 + "vw";
+    cont.style.animationDuration = (Math.random() * 5 + 4) + "s";
+
+    const liston = document.createElement("div");
+    liston.className = "liston";
+
+    const img = document.createElement("img");
+    img.src = fotos[Math.floor(Math.random() * fotos.length)];
+    img.className = "foto";
+
+    cont.appendChild(liston);
+    cont.appendChild(img);
+    v5.appendChild(cont);
+
+    setTimeout(() => cont.remove(), 9000);
+}
+
+/* Activar sorpresa */
+function activarSorpresa() {
+    ir(5);
+    corazonesActivos = false;
+
+    if (!intervaloFotos)
+        intervaloFotos = setInterval(crearFoto, 1200);
+}
+</script>
+
+</body>
+</html>
